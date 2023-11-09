@@ -1,0 +1,16 @@
+<div [formGroup]="chatForm" class="w-100">
+  <mat-form-field appearance="outline" color="accent" class="w-100">
+    <mat-label>{{ "MESSAGE" | translate }}</mat-label>
+    <input matInput autocomplete="off" formControlName="requestMessage" />
+    <button
+      mat-icon-button
+      matSuffix
+      type="submit"
+      [attr.aria-label]="'SEND' | translate"
+      [matTooltip]="'SEND' | translate"
+      [disabled]="chatForm.invalid"
+    >
+      <mat-icon>send</mat-icon>
+    </button>
+  </mat-form-field>
+</div>

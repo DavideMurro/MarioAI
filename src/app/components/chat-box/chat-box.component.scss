@@ -1,0 +1,36 @@
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+
+  .message {
+    max-width: 90%;
+
+    &.message-request {
+      background-color: green;
+      color: white;
+      align-self: flex-start;
+    }
+    &.message-response {
+      background-color: blue;
+      color: white;
+      align-self: flex-end;
+    }
+
+    .info {
+      display: block;
+    }
+    .text {
+      display: block;
+    }
+    .image {
+      display: block;
+      max-width: 100%;
+    }
+    .sending-date {
+      display: block;
+      font-size: 0.7em;
+    }
+  }
+}

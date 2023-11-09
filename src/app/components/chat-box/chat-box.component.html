@@ -1,0 +1,28 @@
+<div class="messages-container" *ngIf="chat?.messages">
+  <mat-card
+    *ngFor="let message of chat.messages"
+    class="message"
+    [ngClass]="{
+      'message-request': message.direction === messageDirectionEnum.request,
+      'message-response': message.direction === messageDirectionEnum.response
+    }"
+  >
+    <mat-card-content>
+      <i *ngIf="message.isLoading" class="info">
+        {{ "LOADING..." | translate }}
+      </i>
+      <i *ngIf="message.isError" class="info">
+        {{ "ERROR" | translate }}
+      </i>
+      <span *ngIf="message.text" class="text">{{ message.text }}</span>
+      <img
+        *ngIf="message.image"
+        class="image"
+        [src]="'data:image/jpg;base64,' + message.image"
+      />
+      <time class="sending-date" [dateTime]="message.sendingDate">
+        {{ message.sendingDate | date : "yyyy/MM/dd HH:mm:ss" }}
+      </time>
+    </mat-card-content>
+  </mat-card>
+</div>
