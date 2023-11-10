@@ -10,18 +10,18 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   public sendMessage(message: string): Observable<TextToImageResponse> {
-    const httpUrl = 'https://5b703ea07a590a9389.gradio.live/sdapi/v1/txt2img';
+    const httpUrl = 'https://860abbed60248b8fbb.gradio.live/sdapi/v1/txt2img';
     const httpParams = {
       prompt: message,
-      save_images: false,
-      steps: '20',
+      steps: '55',
+      save_images: true,
       /*samples: '1',
       guidance_scale: 10,*/
     };
     const httpOptions = {
       headers: {
         'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
+        //'Access-Control-Allow-Origin': '*',
       },
     };
 
