@@ -10,13 +10,13 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   public sendMessage(message: string): Observable<TextToImageResponse> {
-    const httpUrl = 'http://127.0.0.1:7861/sdapi/v1/txt2img';
+    const httpUrl = 'https://5b703ea07a590a9389.gradio.live/sdapi/v1/txt2img';
     const httpParams = {
       prompt: message,
-      steps: '10',
-      samples: '1',
       save_images: false,
-      guidance_scale: 10,
+      steps: '20',
+      /*samples: '1',
+      guidance_scale: 10,*/
     };
     const httpOptions = {
       headers: {
