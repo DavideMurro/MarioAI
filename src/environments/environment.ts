@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  stableDiffusionApiUrl: 'https://485e0fa8dfc113591d.gradio.live/sdapi/v1',
+  stableDiffusionApiUrl: 'https://dc299f2a005d529001.gradio.live/sdapi/v1',
 };
