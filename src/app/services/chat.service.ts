@@ -11,15 +11,11 @@ export class ChatService {
   constructor(private http: HttpClient) {}
 
   public sendMessage(message: string): Observable<TextToImageResponse> {
-    let minImagesCount = 1;
-    let maxImagesCount = 5;
     const httpUrl = environment.stableDiffusionApiUrl + '/txt2img';
     const httpParams = {
       prompt: message,
       steps: '55',
-      n_iter: Math.floor(
-        Math.random() * (maxImagesCount - minImagesCount) + minImagesCount
-      ),
+      n_iter: Math.floor(Math.random() * (5 - 1) + 1),
       /*save_images: true,
       samples: '1',
       guidance_scale: 10,*/
