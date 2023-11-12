@@ -6,6 +6,7 @@
 
   .message {
     max-width: 90%;
+    word-wrap: break-word;
 
     &.message-request {
       background-color: green;

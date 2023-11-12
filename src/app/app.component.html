@@ -1,4 +1,4 @@
 <form [formGroup]="chatForm" (ngSubmit)="onChatFormSubmit()">
-  <app-header [appTitle]="appTitle" [chatForm]="chatForm"></app-header>
+  <app-header [chatForm]="chatForm"></app-header>
   <app-chat-box [chat]="chat"></app-chat-box>
 </form>

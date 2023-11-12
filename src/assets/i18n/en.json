@@ -6,5 +6,7 @@
     "LANGUAGE": "Language",
     "MENU": "Menu",
     "LOADING...": "Loading...",
-    "ERROR": "Error"
+    "ERROR": "Error",
+    "UNEXPECTED_ERROR": "Unexpected error",
+    "NO_IMAGES": "No images"
 }

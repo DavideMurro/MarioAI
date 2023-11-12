@@ -7,6 +7,5 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  @Input() appTitle!: string;
   @Input() chatForm!: FormGroup;
 }

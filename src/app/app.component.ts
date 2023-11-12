@@ -6,6 +6,7 @@ import { Message } from './models/message.model';
 import { MessageDirectionEnum } from './enums/message-direction-enum';
 import { defer } from 'rxjs';
 import { TextToImageResponse } from './models/text-to-image-response.model';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -14,27 +15,40 @@ import { TextToImageResponse } from './models/text-to-image-response.model';
 })
 export class AppComponent {
   public appTitle: string = 'MarioAI';
-  public chatForm: FormGroup = new FormGroup({
-    requestMessage: new FormControl('', Validators.required),
-  });
-  public chat: Chat = { messages: [] };
+  public chatForm: FormGroup;
+  public chat: Chat;
 
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private translate: TranslateService
+  ) {
+    this.chatForm = new FormGroup({
+      requestMessage: new FormControl('', [Validators.maxLength(75)]),
+    });
+    this.chat = { messages: [] };
+  }
 
   public onChatFormSubmit() {
     let requestMessageText: string = this.chatForm.get('requestMessage')?.value;
     this.chatForm.get('requestMessage')?.reset();
+    // remove any focus
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
 
     if (requestMessageText) {
-      let requestMessage: Message = {
+      let requestMessage: Message;
+      let responseMessage: Message;
+
+      // request
+      requestMessage = {
         sendingDate: new Date(),
         direction: MessageDirectionEnum.request,
         text: requestMessageText,
       };
-      let responseMessage: Message;
-
       this.chat.messages.unshift(requestMessage);
 
+      // response
       defer(() => {
         responseMessage = {
           direction: MessageDirectionEnum.response,
@@ -47,16 +61,33 @@ export class AppComponent {
         next: (response: TextToImageResponse) => {
           responseMessage.isLoading = false;
           responseMessage.sendingDate = new Date();
-          responseMessage.image = response.images[0];
+          if (response?.images?.length > 0) {
+            response.images.forEach((image, index) => {
+              if (index === 0) {
+                responseMessage.image = image;
+              } else {
+                responseMessage = {
+                  direction: MessageDirectionEnum.response,
+                  image: image,
+                };
+                this.chat.messages.unshift(responseMessage);
+              }
+            });
+          } else {
+            this.translate.get('NO_IMAGES').subscribe((res: string) => {
+              responseMessage.errorMessage = res;
+              responseMessage.isError = true;
+            });
+          }
         },
         error: (error: any) => {
           console.error(error);
           responseMessage.isLoading = false;
-          responseMessage.isError = true;
+          this.translate.get('UNEXPECTED_ERROR').subscribe((res: string) => {
+            responseMessage.errorMessage = res;
+            responseMessage.isError = true;
+          });
         },
-        /*complete: () => {
-          console.log('completato zio chen');
-        },*/
       });
     }
   }

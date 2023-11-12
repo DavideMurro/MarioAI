@@ -12,7 +12,10 @@
         {{ "LOADING..." | translate }}
       </i>
       <i *ngIf="message.isError" class="info">
-        {{ "ERROR" | translate }}
+        <span *ngIf="!message.errorMessage">
+          {{ "UNEXPECTED_ERROR" | translate }}
+        </span>
+        <span *ngIf="message.errorMessage">{{ message.errorMessage }}</span>
       </i>
       <span *ngIf="message.text" class="text">{{ message.text }}</span>
       <img

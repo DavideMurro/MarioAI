@@ -1,9 +1,10 @@
 <mat-toolbar>
   <mat-toolbar-row>
-    <span>{{ appTitle }}</span>
+    <span>MarioAI</span>
     <span class="flex-auto"></span>
     <button
       mat-icon-button
+      type="button"
       [attr.aria-label]="'LANGUAGE' | translate"
       [matTooltip]="'LANGUAGE' | translate"
     >
@@ -11,6 +12,7 @@
     </button>
     <button
       mat-icon-button
+      type="button"
       [attr.aria-label]="'MENU' | translate"
       [matTooltip]="'MENU' | translate"
     >
@@ -18,7 +20,7 @@
     </button>
   </mat-toolbar-row>
 
-  <mat-toolbar-row>
+  <mat-toolbar-row class="h-100">
     <app-chat-input [chatForm]="chatForm" class="w-100"></app-chat-input>
   </mat-toolbar-row>
 </mat-toolbar>

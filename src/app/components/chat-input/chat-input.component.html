@@ -8,7 +8,7 @@
       type="submit"
       [attr.aria-label]="'SEND' | translate"
       [matTooltip]="'SEND' | translate"
-      [disabled]="chatForm.invalid"
+      [disabled]="!chatForm.valid || !chatForm.value.requestMessage"
     >
       <mat-icon>send</mat-icon>
     </button>
