@@ -62,15 +62,24 @@ export class AppComponent {
           responseMessage.isLoading = false;
           responseMessage.sendingDate = new Date();
           if (response?.images?.length > 0) {
+            // TODO: inserire tutte le immaginiin 1 solo messaggio
             response.images.forEach((image, index) => {
               if (index === 0) {
                 responseMessage.image = image;
               } else {
-                responseMessage = {
+                // insert other messages after the first one
+                let indexOfResponseMessage = this.chat.messages.findIndex(
+                  (x) => x === responseMessage
+                );
+                let nextResponseMessage = {
                   direction: MessageDirectionEnum.response,
                   image: image,
                 };
-                this.chat.messages.unshift(responseMessage);
+                this.chat.messages.splice(
+                  indexOfResponseMessage - (index - 1),
+                  0,
+                  nextResponseMessage
+                );
               }
             });
           } else {
