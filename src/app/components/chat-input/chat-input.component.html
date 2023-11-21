@@ -12,5 +12,10 @@
     >
       <mat-icon>send</mat-icon>
     </button>
+    <mat-error *ngIf="chatForm.get('requestMessage')?.hasError('maxlength')">
+      {{
+        'ERROR_MESSAGE_TOO_LONG' | translate:{requiredLength:chatForm.get("requestMessage")?.errors?.['maxlength']?.requiredLength, actualLength:chatForm.get("requestMessage")?.errors?.['maxlength']?.actualLength }
+      }}
+    </mat-error>
   </mat-form-field>
 </div>

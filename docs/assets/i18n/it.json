@@ -8,5 +8,6 @@
     "LOADING...": "Caricamento...",
     "ERROR": "Errore",
     "UNEXPECTED_ERROR": "Errore imprevisto",
-    "NO_IMAGES": "Nessuna immagine"
+    "NO_IMAGES": "Nessuna immagine",
+    "ERROR_MESSAGE_TOO_LONG": "Il messaggio è troppo lungo: {{actual}} / {{required}} caratteri"
 }

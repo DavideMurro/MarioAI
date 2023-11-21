@@ -8,5 +8,6 @@
     "LOADING...": "Loading...",
     "ERROR": "Error",
     "UNEXPECTED_ERROR": "Unexpected error",
-    "NO_IMAGES": "No images"
+    "NO_IMAGES": "No images",
+    "ERROR_MESSAGE_TOO_LONG": "Message is too long: {{actualLength}} / {{requiredLength}} chars"
 }
