@@ -32,4 +32,9 @@ export class ChatService {
       httpOptions
     );
   }
+
+  public testConnection(): Observable<boolean> {
+    const httpUrl = environment.stableDiffusionApiUrl + '/options';
+    return this.http.get<boolean>(httpUrl);
+  }
 }

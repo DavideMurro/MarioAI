@@ -9,5 +9,8 @@
     "ERROR": "Error",
     "UNEXPECTED_ERROR": "Unexpected error",
     "NO_IMAGES": "No images",
-    "ERROR_MESSAGE_TOO_LONG": "Message is too long: {{actualLength}} / {{requiredLength}} chars"
+    "ERROR_MESSAGE_TOO_LONG": "Message is too long: {{actualLength}} / {{requiredLength}} chars",
+    "WELCOME_MESSAGE": "Hi, it's me! Mario! Send me a message and I will generate some images for you.",
+    "NO_CONNECTION_MESSAGE": "Sorry bro, I can't stabilize a connection. Please try again later.",
+    "ERROR_MESSAGE": "Man, I can't connect anymore, try again later."
 }

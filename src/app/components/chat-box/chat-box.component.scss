@@ -19,9 +19,13 @@
       align-self: flex-end;
     }
 
-    .info {
-      display: block;
+    &.loading {
+      opacity: 0.6;
     }
+    &.error {
+      box-shadow: 0px 0px 0px 2px red;
+    }
+
     .text {
       display: block;
     }

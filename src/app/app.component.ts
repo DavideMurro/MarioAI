@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChatService } from './services/chat.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Chat } from './models/chat.model';
@@ -13,7 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appTitle: string = 'MarioAI';
   public chatForm: FormGroup;
   public chat: Chat;
@@ -26,6 +26,37 @@ export class AppComponent {
       requestMessage: new FormControl('', [Validators.maxLength(75)]),
     });
     this.chat = { messages: [] };
+  }
+  ngOnInit(): void {
+    this.initChat();
+  }
+
+  public initChat() {
+    // welcome message
+    this.translate.get('WELCOME_MESSAGE').subscribe((res: string) => {
+      let message: Message = {
+        sendingDate: new Date(),
+        direction: MessageDirectionEnum.response,
+        text: res,
+      };
+      this.chat.messages.unshift(message);
+    });
+
+    // check connection
+    this.chatService.testConnection().subscribe({
+      error: (error: any) => {
+        console.error(error);
+        this.translate.get('NO_CONNECTION_MESSAGE').subscribe((res: string) => {
+          let message: Message = {
+            sendingDate: new Date(),
+            direction: MessageDirectionEnum.response,
+            isError: true,
+            text: res,
+          };
+          this.chat.messages.unshift(message);
+        });
+      },
+    });
   }
 
   public onChatFormSubmit() {
@@ -62,7 +93,7 @@ export class AppComponent {
           responseMessage.isLoading = false;
           responseMessage.sendingDate = new Date();
           if (response?.images?.length > 0) {
-            // TODO: inserire tutte le immaginiin 1 solo messaggio
+            // TODO: inserire tutte le immagini in 1 solo messaggio
             response.images.forEach((image, index) => {
               if (index === 0) {
                 responseMessage.image = image;
@@ -84,7 +115,7 @@ export class AppComponent {
             });
           } else {
             this.translate.get('NO_IMAGES').subscribe((res: string) => {
-              responseMessage.errorMessage = res;
+              responseMessage.text = res;
               responseMessage.isError = true;
             });
           }
@@ -92,8 +123,8 @@ export class AppComponent {
         error: (error: any) => {
           console.error(error);
           responseMessage.isLoading = false;
-          this.translate.get('UNEXPECTED_ERROR').subscribe((res: string) => {
-            responseMessage.errorMessage = res;
+          this.translate.get('ERROR_MESSAGE').subscribe((res: string) => {
+            responseMessage.text = res;
             responseMessage.isError = true;
           });
         },

@@ -4,20 +4,21 @@
     class="message"
     [ngClass]="{
       'message-request': message.direction === messageDirectionEnum.request,
-      'message-response': message.direction === messageDirectionEnum.response
+      'message-response': message.direction === messageDirectionEnum.response,
+      loading: message.isLoading,
+      error: message.isError
     }"
   >
     <mat-card-content>
-      <i *ngIf="message.isLoading" class="info">
+      <span *ngIf="message.isLoading && !message.text">
         {{ "LOADING..." | translate }}
-      </i>
-      <i *ngIf="message.isError" class="info">
-        <span *ngIf="!message.errorMessage">
-          {{ "UNEXPECTED_ERROR" | translate }}
-        </span>
-        <span *ngIf="message.errorMessage">{{ message.errorMessage }}</span>
-      </i>
-      <span *ngIf="message.text" class="text">{{ message.text }}</span>
+      </span>
+      <span *ngIf="message.isError && !message.text">
+        {{ "ERROR" | translate }}
+      </span>
+      <span *ngIf="message.text" class="text">
+        {{ message.text }}
+      </span>
       <img
         *ngIf="message.image"
         class="image"

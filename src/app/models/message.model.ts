@@ -5,7 +5,6 @@ export class Message {
   sendingDate?: Date;
   isLoading?: boolean;
   isError?: boolean;
-  errorMessage?: string;
   text?: string | null;
   image?: string | null;
 }
