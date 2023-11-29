@@ -1,4 +1,10 @@
-<form [formGroup]="chatForm" (ngSubmit)="onChatFormSubmit()">
-  <app-header [chatForm]="chatForm"></app-header>
+<div>
+  <app-header
+    [chatForm]="chatForm"
+    [languageForm]="languageForm"
+    [languages]="languages"
+    (languageFormSubmit)="onLanguageFormSubmit()"
+    (chatFormSubmit)="onChatFormSubmit()"
+  ></app-header>
   <app-chat-box [chat]="chat"></app-chat-box>
-</form>
+</div>

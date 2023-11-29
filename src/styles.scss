@@ -1,4 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
 
 html,
 body {
@@ -93,4 +94,13 @@ body {
 }
 .h-10 {
   height: 10% !important;
+}
+
+mat-form-field {
+  &.small {
+    @include mat.form-field-density(-5);
+  }
+  &.no-hint .mat-mdc-form-field-subscript-wrapper {
+    display: none;
+  }
 }

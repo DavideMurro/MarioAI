@@ -6,7 +6,11 @@ import { Message } from './models/message.model';
 import { MessageDirectionEnum } from './enums/message-direction-enum';
 import { defer } from 'rxjs';
 import { TextToImageResponse } from './models/text-to-image-response.model';
-import { TranslateService } from '@ngx-translate/core';
+import {
+  DefaultLangChangeEvent,
+  LangChangeEvent,
+  TranslateService,
+} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +18,9 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  public appTitle: string = 'MarioAI';
+  public appTitle: string;
+  public languageForm: FormGroup;
+  public languages: String[];
   public chatForm: FormGroup;
   public chat: Chat;
 
@@ -22,16 +28,55 @@ export class AppComponent implements OnInit {
     private chatService: ChatService,
     private translate: TranslateService
   ) {
+    // initialize attributes
+    this.appTitle = 'MarioAI';
+    this.languageForm = new FormGroup({
+      language: new FormControl(null),
+    });
+    this.languages = [];
     this.chatForm = new FormGroup({
-      requestMessage: new FormControl('', [Validators.maxLength(75)]),
+      requestMessage: new FormControl(null, [Validators.maxLength(75)]),
     });
     this.chat = { messages: [] };
-  }
-  ngOnInit(): void {
+
+    // inits
+    this.initLanguages();
     this.initChat();
   }
+  ngOnInit(): void {
+    this.startChat();
+  }
 
-  public initChat() {
+  private initLanguages() {
+    // reset
+    this.languageForm.reset();
+    this.languages = [];
+
+    // set languages
+    this.translate.addLangs(['en', 'it']);
+    this.languages = this.translate.getLangs();
+
+    // set current language
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      this.languageForm.get('language')?.setValue(event.lang);
+    });
+    this.translate.setDefaultLang('en');
+    this.translate.use('en');
+  }
+
+  public onLanguageFormSubmit() {
+    let languageText: string = this.languageForm.get('language')?.value;
+    if (languageText) {
+      this.translate.use(languageText);
+    }
+  }
+
+  private initChat() {
+    this.chatForm.reset();
+    this.chat = { messages: [] };
+  }
+
+  private startChat() {
     // welcome message
     this.translate.get('WELCOME_MESSAGE').subscribe((res: string) => {
       let message: Message = {
@@ -123,6 +168,7 @@ export class AppComponent implements OnInit {
         error: (error: any) => {
           console.error(error);
           responseMessage.isLoading = false;
+          responseMessage.sendingDate = new Date();
           this.translate.get('ERROR_MESSAGE').subscribe((res: string) => {
             responseMessage.text = res;
             responseMessage.isError = true;

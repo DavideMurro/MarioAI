@@ -20,6 +20,7 @@ import { ChatInputComponent } from './components/chat-input/chat-input.component
 import { ChatBoxComponent } from './components/chat-box/chat-box.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatCardModule } from '@angular/material/card';
+import { MatSelectModule } from '@angular/material/select';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -44,7 +45,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
       },
-      defaultLanguage: 'en',
     }),
 
     ReactiveFormsModule,
@@ -55,6 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatInputModule,
     MatTooltipModule,
     MatCardModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,4 +8,5 @@ import { FormGroup } from '@angular/forms';
 })
 export class ChatInputComponent {
   @Input() chatForm!: FormGroup;
+  @Output() chatFormSubmit: EventEmitter<void> = new EventEmitter<void>();
 }
