@@ -100,7 +100,4 @@ mat-form-field {
   &.small {
     @include mat.form-field-density(-5);
   }
-  &.no-hint .mat-mdc-form-field-subscript-wrapper {
-    display: none;
-  }
 }

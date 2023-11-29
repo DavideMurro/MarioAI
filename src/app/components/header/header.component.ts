@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { AppHeader } from 'src/app/models/app-header.model';
+import { Language } from 'src/app/models/language.model';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +10,8 @@ import { FormGroup } from '@angular/forms';
 })
 export class HeaderComponent {
   @Input() chatForm!: FormGroup;
-  @Input() languageForm!: FormGroup;
-  @Input() languages!: String[];
-  @Output() languageFormSubmit: EventEmitter<void> = new EventEmitter<void>();
+  @Input() appHeaderForm!: FormGroup;
+  @Input() appHeader!: AppHeader;
+  @Output() appHeaderFormSubmit: EventEmitter<void> = new EventEmitter<void>();
   @Output() chatFormSubmit: EventEmitter<void> = new EventEmitter<void>();
 }

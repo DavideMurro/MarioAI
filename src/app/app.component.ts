@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ChatService } from './services/chat.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Chat } from './models/chat.model';
@@ -6,21 +6,20 @@ import { Message } from './models/message.model';
 import { MessageDirectionEnum } from './enums/message-direction-enum';
 import { defer } from 'rxjs';
 import { TextToImageResponse } from './models/text-to-image-response.model';
-import {
-  DefaultLangChangeEvent,
-  LangChangeEvent,
-  TranslateService,
-} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
+import { i18n } from 'src/assets/i18n/i18n';
+import { environment } from 'src/environments/environment';
+import { AppHeader } from './models/app-header.model';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   public appTitle: string;
-  public languageForm: FormGroup;
-  public languages: String[];
+  public appHeaderForm: FormGroup;
+  public appHeader: AppHeader;
   public chatForm: FormGroup;
   public chat: Chat;
 
@@ -29,54 +28,37 @@ export class AppComponent implements OnInit {
     private translate: TranslateService
   ) {
     // initialize attributes
-    this.appTitle = 'MarioAI';
-    this.languageForm = new FormGroup({
-      language: new FormControl(null),
-    });
-    this.languages = [];
-    this.chatForm = new FormGroup({
-      requestMessage: new FormControl(null, [Validators.maxLength(75)]),
-    });
+    this.appTitle = environment.appTitle;
     this.chat = { messages: [] };
+    this.appHeader = {
+      languages: i18n,
+      currentLanguageCode: environment.defaultLanguageCode,
+      defaultLanguageCode: environment.defaultLanguageCode,
+    };
+    this.appHeaderForm = new FormGroup({
+      languageCode: new FormControl(this.appHeader.defaultLanguageCode),
+    });
+    this.chatForm = new FormGroup({
+      requestMessage: new FormControl('', [Validators.maxLength(75)]),
+    });
 
     // inits
-    this.initLanguages();
+    this.initAppHeader();
     this.initChat();
   }
-  ngOnInit(): void {
-    this.startChat();
+
+  private initAppHeader() {
+    this.translate.addLangs(this.appHeader.languages.map((l) => l.code));
+    this.translate.setDefaultLang(this.appHeader.defaultLanguageCode);
+    this.translate.use(this.appHeader.defaultLanguageCode);
   }
-
-  private initLanguages() {
-    // reset
-    this.languageForm.reset();
-    this.languages = [];
-
-    // set languages
-    this.translate.addLangs(['en', 'it']);
-    this.languages = this.translate.getLangs();
-
-    // set current language
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.languageForm.get('language')?.setValue(event.lang);
-    });
-    this.translate.setDefaultLang('en');
-    this.translate.use('en');
-  }
-
-  public onLanguageFormSubmit() {
-    let languageText: string = this.languageForm.get('language')?.value;
-    if (languageText) {
-      this.translate.use(languageText);
-    }
+  public onAppHeaderFormSubmit() {
+    this.appHeader.currentLanguageCode =
+      this.appHeaderForm.get('languageCode')?.value;
+    this.translate.use(this.appHeader.currentLanguageCode);
   }
 
   private initChat() {
-    this.chatForm.reset();
-    this.chat = { messages: [] };
-  }
-
-  private startChat() {
     // welcome message
     this.translate.get('WELCOME_MESSAGE').subscribe((res: string) => {
       let message: Message = {
@@ -103,7 +85,6 @@ export class AppComponent implements OnInit {
       },
     });
   }
-
   public onChatFormSubmit() {
     let requestMessageText: string = this.chatForm.get('requestMessage')?.value;
     this.chatForm.get('requestMessage')?.reset();
@@ -138,7 +119,6 @@ export class AppComponent implements OnInit {
           responseMessage.isLoading = false;
           responseMessage.sendingDate = new Date();
           if (response?.images?.length > 0) {
-            // TODO: inserire tutte le immagini in 1 solo messaggio
             response.images.forEach((image, index) => {
               if (index === 0) {
                 responseMessage.image = image;

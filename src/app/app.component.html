@@ -1,9 +1,9 @@
 <div>
   <app-header
     [chatForm]="chatForm"
-    [languageForm]="languageForm"
-    [languages]="languages"
-    (languageFormSubmit)="onLanguageFormSubmit()"
+    [appHeaderForm]="appHeaderForm"
+    [appHeader]="appHeader"
+    (appHeaderFormSubmit)="onAppHeaderFormSubmit()"
     (chatFormSubmit)="onChatFormSubmit()"
   ></app-header>
   <app-chat-box [chat]="chat"></app-chat-box>

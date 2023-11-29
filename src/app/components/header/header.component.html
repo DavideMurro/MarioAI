@@ -3,15 +3,23 @@
     <img class="logo-image" src="assets/logo/logo.png" />
     <span class="flex-auto"></span>
 
-    <form [formGroup]="languageForm" (ngSubmit)="languageFormSubmit.emit()">
-      <mat-form-field appearance="outline" color="accent" class="small no-hint">
+    <form [formGroup]="appHeaderForm" (ngSubmit)="appHeaderFormSubmit.emit()">
+      <mat-form-field
+        appearance="outline"
+        color="accent"
+        subscriptSizing="dynamic"
+        class="small"
+      >
         <mat-label>{{ "LANGUAGE" | translate }}</mat-label>
         <mat-select
-          formControlName="language"
-          (selectionChange)="languageFormSubmit.emit()"
+          formControlName="languageCode"
+          (selectionChange)="appHeaderFormSubmit.emit()"
         >
-          <mat-option *ngFor="let language of languages" [value]="language">
-            {{ language }}
+          <mat-option
+            *ngFor="let language of appHeader.languages"
+            [value]="language.code"
+          >
+            {{ language.name }}
           </mat-option>
         </mat-select>
       </mat-form-field>
