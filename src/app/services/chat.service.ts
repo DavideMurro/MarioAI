@@ -2,16 +2,17 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TextToImageResponse } from '../models/text-to-image-response.model';
-import { environment } from 'src/environments/environment';
+import { AppStore } from '../stores/app.store';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private store: AppStore) {}
 
   public sendMessage(message: string): Observable<TextToImageResponse> {
-    const httpUrl = environment.stableDiffusionApiUrl + '/txt2img';
+    const httpUrl =
+      this.store.appHeader.currentStableDiffusionApiUrl + '/txt2img';
     const httpParams = {
       prompt: message,
       steps: '55',
@@ -33,8 +34,9 @@ export class ChatService {
     );
   }
 
-  public testConnection(): Observable<boolean> {
-    const httpUrl = environment.stableDiffusionApiUrl + '/options';
-    return this.http.get<boolean>(httpUrl);
+  public testConnection(): Observable<any> {
+    const httpUrl =
+      this.store.appHeader.currentStableDiffusionApiUrl + '/options';
+    return this.http.get<any>(httpUrl);
   }
 }

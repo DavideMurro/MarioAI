@@ -12,5 +12,15 @@
     "ERROR_MESSAGE_TOO_LONG": "Message is too long: {{actualLength}} / {{requiredLength}} chars",
     "WELCOME_MESSAGE": "Hi, it's me! Mario! Send me a message and I will generate some images for you.",
     "NO_CONNECTION_MESSAGE": "Sorry bro, I can't stabilize a connection. Please try again later.",
-    "ERROR_MESSAGE": "Man, I can't connect anymore, try again later."
+    "ERROR_MESSAGE": "Man, I can't connect anymore, try again later.",
+    "LANGUAGE_SELECTOR_TITLE": "System language",
+    "SELECT_LANGUAGE": "Select language",
+    "CANCEL": "Cancel",
+    "SAVE": "Save",
+    "API_URLS_INPUT_TITLE": "API URLs",
+    "API_URLS": "API URLs",
+    "STABLE_DIFFUSION_API_URL": "Stable diffusion API URL",
+    "EDIT_API_URL_SUCCESS_MESSAGE": "You changed API URLs, and it looks like it's working",
+    "EDIT_API_URL_ERROR_MESSAGE": "You changed API URLs, but I think you did it wrong",
+    "EDIT_LANGUAGE_MESSAGE": "You changed my language! Nice bro!"
 }

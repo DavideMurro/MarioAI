@@ -1,0 +1,26 @@
+<div mat-dialog-title>{{ "API_URLS_INPUT_TITLE" | translate }}</div>
+<div mat-dialog-content>
+  <div class="container-column">
+    <mat-form-field appearance="outline" color="accent" class="w-100">
+      <input
+        matInput
+        autocomplete="on"
+        [(ngModel)]="data.currentStableDiffusionApiUrl"
+      />
+      <mat-label>{{ "STABLE_DIFFUSION_API_URL" | translate }}</mat-label>
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">
+    {{ "CANCEL" | translate }}
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+  >
+    {{ "SAVE" | translate }}
+  </button>
+</div>

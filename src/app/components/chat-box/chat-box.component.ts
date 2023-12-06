@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { MessageDirectionEnum } from 'src/app/enums/message-direction-enum';
 import { Chat } from 'src/app/models/chat.model';
+import { AppStore } from 'src/app/stores/app.store';
 
 @Component({
   selector: 'app-chat-box',
@@ -8,6 +9,10 @@ import { Chat } from 'src/app/models/chat.model';
   styleUrls: ['./chat-box.component.scss'],
 })
 export class ChatBoxComponent {
-  @Input() chat!: Chat;
+  public chat: Chat;
   public messageDirectionEnum = MessageDirectionEnum;
+
+  constructor(private store: AppStore) {
+    this.chat = this.store.chat;
+  }
 }

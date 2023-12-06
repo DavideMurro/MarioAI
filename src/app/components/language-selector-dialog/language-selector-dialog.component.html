@@ -1,0 +1,28 @@
+<div mat-dialog-title>{{ "LANGUAGE_SELECTOR_TITLE" | translate }}</div>
+<div mat-dialog-content>
+  <mat-radio-group
+    class="container-row"
+    [attr.aria-label]="'SELECT_LANGUAGE' | translate"
+    [(ngModel)]="data.currentLanguageCode"
+  >
+    <mat-radio-button
+      *ngFor="let language of data.languages"
+      [value]="language.code"
+    >
+      {{ language.name }}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">
+    {{ "CANCEL" | translate }}
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [mat-dialog-close]="data"
+    cdkFocusInitial
+  >
+    {{ "SAVE" | translate }}
+  </button>
+</div>

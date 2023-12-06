@@ -3,27 +3,24 @@
     <img class="logo-image" src="assets/logo/logo.png" />
     <span class="flex-auto"></span>
 
-    <form [formGroup]="appHeaderForm" (ngSubmit)="appHeaderFormSubmit.emit()">
-      <mat-form-field
-        appearance="outline"
-        color="accent"
-        subscriptSizing="dynamic"
-        class="small"
-      >
-        <mat-label>{{ "LANGUAGE" | translate }}</mat-label>
-        <mat-select
-          formControlName="languageCode"
-          (selectionChange)="appHeaderFormSubmit.emit()"
-        >
-          <mat-option
-            *ngFor="let language of appHeader.languages"
-            [value]="language.code"
-          >
-            {{ language.name }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </form>
+    <button
+      mat-icon-button
+      type="button"
+      [attr.aria-label]="'LANGUAGE' | translate"
+      [matTooltip]="'LANGUAGE' | translate"
+      (click)="onLanguageSelect()"
+    >
+      <mat-icon>translate</mat-icon>
+    </button>
+    <button
+      mat-icon-button
+      type="button"
+      [attr.aria-label]="'API_URLS' | translate"
+      [matTooltip]="'API_URLS' | translate"
+      (click)="onApiUrlsSelect()"
+    >
+      <mat-icon>http</mat-icon>
+    </button>
 
     <!--
     <button
@@ -38,10 +35,6 @@
   </mat-toolbar-row>
 
   <mat-toolbar-row class="h-100">
-    <app-chat-input
-      [chatForm]="chatForm"
-      (chatFormSubmit)="chatFormSubmit.emit()"
-      class="w-100"
-    ></app-chat-input>
+    <app-chat-input class="w-100"></app-chat-input>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -96,6 +96,19 @@ body {
   height: 10% !important;
 }
 
+.container-row {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  padding: 16px 0;
+}
+.container-column {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px 0;
+}
+
 mat-form-field {
   &.small {
     @include mat.form-field-density(-5);

@@ -12,5 +12,15 @@
     "ERROR_MESSAGE_TOO_LONG": "Il messaggio è troppo lungo: {{actual}} / {{required}} caratteri",
     "WELCOME_MESSAGE": "Ciao, sono io! Mario! Inviami un messaggio e genererò alcune immagini per te.",
     "NO_CONNECTION_MESSAGE": "Scusa vecchio, non riesco a stabilire una connessione. Riprova più tardi.",
-    "ERROR_MESSAGE": "Vez non connetto più, riprova più tardi."
+    "ERROR_MESSAGE": "Vez non connetto più, riprova più tardi.",
+    "LANGUAGE_SELECTOR_TITLE": "Lingua di sistema",
+    "SELECT_LANGUAGE": "Seleziona lingua",
+    "CANCEL": "Cancella",
+    "SAVE": "Salva",
+    "API_URLS_INPUT_TITLE": "URL API",
+    "API_URLS": "URL API",
+    "STABLE_DIFFUSION_API_URL": "URL API di Stable diffusion",
+    "EDIT_API_URL_SUCCESS_MESSAGE": "Hai cambiato gli URL API, e sembra funzioni tutto",
+    "EDIT_API_URL_ERROR_MESSAGE": "Hai cambiato gli URL API, ma penso tu abbia sbagliato qualcosa",
+    "EDIT_LANGUAGE_MESSAGE": "Hai cambiato la mia lingua! Grande fra!"
 }
