@@ -3,5 +3,5 @@ export const environment = {
   appTitle: 'MarioAI',
   defaultLanguageCode: 'en',
   defaultStableDiffusionApiUrl:
-    'https://88364cd2cbc945c9cd.gradio.live/sdapi/v1',
+    'https://b1e2df0be0298e569b.gradio.live/sdapi/v1',
 };
