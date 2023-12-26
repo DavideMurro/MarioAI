@@ -1,6 +1,6 @@
 <form [formGroup]="chatForm" (ngSubmit)="onChatFormSubmit()" class="w-100">
   <mat-form-field appearance="outline" color="accent" class="w-100">
-    <mat-label>{{ "MESSAGE" | translate }}</mat-label>
+    <mat-label>{{ "PROMPT" | translate }}</mat-label>
     <input matInput autocomplete="off" formControlName="requestMessage" />
     <button
       mat-icon-button
