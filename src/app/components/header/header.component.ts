@@ -10,6 +10,7 @@ import { Message } from 'src/app/models/message.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Chat } from 'src/app/models/chat.model';
 import { defer } from 'rxjs';
+import { ApiUrlsData } from 'src/app/models/api-urls-data.model';
 
 @Component({
   selector: 'app-header',
@@ -34,27 +35,23 @@ export class HeaderComponent {
     this.dialog
       .open(LanguageSelectorDialogComponent, {
         data: {
-          currentLanguageCode: this.store.appHeader.currentLanguageCode,
+          selectedLanguageCode: this.store.appHeader.currentLanguageCode,
           languages: this.store.appHeader.languages,
         },
         width: '600px',
       })
       .afterClosed()
-      .subscribe((result: any) => {
+      .subscribe((result: string) => {
         if (result) {
-          this.store.setLanguage(result.currentLanguageCode);
-
-          // send message
-          this.translate
-            .get('EDIT_LANGUAGE_MESSAGE')
-            .subscribe((res: string) => {
-              let responseMessage = {
-                direction: MessageDirectionEnum.response,
-                sendingDate: new Date(),
-                text: res,
-              };
-              this.chat.messages.unshift(responseMessage);
-            });
+          this.store.setLanguage(result).subscribe(() => {
+            // send message
+            let responseMessage = {
+              direction: MessageDirectionEnum.response,
+              sendingDate: new Date(),
+              text: this.translate.instant('EDIT_LANGUAGE_MESSAGE'),
+            };
+            this.chat.messages.unshift(responseMessage);
+          });
         }
       });
   }
@@ -62,13 +59,13 @@ export class HeaderComponent {
     this.dialog
       .open(ApiUrlsInputDialogComponent, {
         data: {
-          currentStableDiffusionApiUrl:
+          stableDiffusionApiUrl:
             this.store.appHeader.currentStableDiffusionApiUrl,
         },
         width: '600px',
       })
       .afterClosed()
-      .subscribe((result: any) => {
+      .subscribe((result: ApiUrlsData) => {
         if (result) {
           this.store.setApiUrls(result);
 
@@ -83,25 +80,21 @@ export class HeaderComponent {
 
             return this.chatService.testConnection();
           }).subscribe({
-            next: (result: any) => {
-              this.translate
-                .get('EDIT_API_URL_SUCCESS_MESSAGE')
-                .subscribe((res: string) => {
-                  responseMessage.sendingDate = new Date();
-                  responseMessage.text = res;
-                  responseMessage.isLoading = false;
-                });
+            next: (result: boolean) => {
+              responseMessage.sendingDate = new Date();
+              responseMessage.text = this.translate.instant(
+                'EDIT_API_URL_SUCCESS_MESSAGE'
+              );
+              responseMessage.isLoading = false;
             },
             error: (error: any) => {
               console.error(error);
-              this.translate
-                .get('EDIT_API_URL_ERROR_MESSAGE')
-                .subscribe((res: string) => {
-                  responseMessage.sendingDate = new Date();
-                  responseMessage.isError = true;
-                  responseMessage.text = res;
-                  responseMessage.isLoading = false;
-                });
+              responseMessage.sendingDate = new Date();
+              responseMessage.isError = true;
+              responseMessage.text = this.translate.instant(
+                'EDIT_API_URL_ERROR_MESSAGE'
+              );
+              responseMessage.isLoading = false;
             },
           });
         }

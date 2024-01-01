@@ -28,28 +28,24 @@ export class AppComponent implements OnInit {
 
   private initChat() {
     // welcome message
-    this.translate.get('WELCOME_MESSAGE').subscribe((res: string) => {
-      let message: Message = {
-        sendingDate: new Date(),
-        direction: MessageDirectionEnum.response,
-        text: res,
-      };
-      this.chat.messages.unshift(message);
-    });
+    let message: Message = {
+      sendingDate: new Date(),
+      direction: MessageDirectionEnum.response,
+      text: this.translate.instant('WELCOME_MESSAGE'),
+    };
+    this.chat.messages.unshift(message);
 
     // check connection
     this.chatService.testConnection().subscribe({
       error: (error: any) => {
         console.error(error);
-        this.translate.get('NO_CONNECTION_MESSAGE').subscribe((res: string) => {
-          let message: Message = {
-            sendingDate: new Date(),
-            direction: MessageDirectionEnum.response,
-            isError: true,
-            text: res,
-          };
-          this.chat.messages.unshift(message);
-        });
+        let message: Message = {
+          sendingDate: new Date(),
+          direction: MessageDirectionEnum.response,
+          isError: true,
+          text: this.translate.instant('NO_CONNECTION_MESSAGE'),
+        };
+        this.chat.messages.unshift(message);
       },
     });
   }

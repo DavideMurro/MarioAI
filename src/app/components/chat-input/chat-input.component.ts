@@ -86,20 +86,16 @@ export class ChatInputComponent {
               }
             });
           } else {
-            this.translate.get('NO_IMAGES').subscribe((res: string) => {
-              responseMessage.text = res;
-              responseMessage.isError = true;
-            });
+            responseMessage.text = this.translate.instant('NO_IMAGES');
+            responseMessage.isError = true;
           }
         },
         error: (error: any) => {
           console.error(error);
           responseMessage.isLoading = false;
           responseMessage.sendingDate = new Date();
-          this.translate.get('ERROR_MESSAGE').subscribe((res: string) => {
-            responseMessage.text = res;
-            responseMessage.isError = true;
-          });
+          responseMessage.text = this.translate.instant('ERROR_MESSAGE');
+          responseMessage.isError = true;
         },
       });
     }

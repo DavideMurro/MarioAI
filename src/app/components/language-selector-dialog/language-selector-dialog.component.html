@@ -1,28 +1,31 @@
-<div mat-dialog-title>{{ "LANGUAGE_SELECTOR_TITLE" | translate }}</div>
-<div mat-dialog-content>
-  <mat-radio-group
-    class="container-row"
-    [attr.aria-label]="'SELECT_LANGUAGE' | translate"
-    [(ngModel)]="data.currentLanguageCode"
-  >
-    <mat-radio-button
-      *ngFor="let language of data.languages"
-      [value]="language.code"
+<form [formGroup]="languageForm" (ngSubmit)="onLanguageFormSubmit()">
+  <div mat-dialog-title>{{ "LANGUAGE_SELECTOR_TITLE" | translate }}</div>
+  <div mat-dialog-content>
+    <mat-radio-group
+      class="container-row"
+      [attr.aria-label]="'SELECT_LANGUAGE' | translate"
+      formControlName="languageCode"
     >
-      {{ language.name }}
-    </mat-radio-button>
-  </mat-radio-group>
-</div>
-<div mat-dialog-actions align="end">
-  <button mat-button (click)="dialogRef.close()">
-    {{ "CANCEL" | translate }}
-  </button>
-  <button
-    mat-raised-button
-    color="accent"
-    [mat-dialog-close]="data"
-    cdkFocusInitial
-  >
-    {{ "SAVE" | translate }}
-  </button>
-</div>
+      <mat-radio-button
+        *ngFor="let language of languages"
+        [value]="language.code"
+      >
+        {{ language.name }}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div mat-dialog-actions align="end">
+    <button mat-button type="button" (click)="onLanguageFormCancel()">
+      {{ "CANCEL" | translate }}
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      color="accent"
+      cdkFocusInitial
+      [disabled]="!languageForm.valid"
+    >
+      {{ "SAVE" | translate }}
+    </button>
+  </div>
+</form>

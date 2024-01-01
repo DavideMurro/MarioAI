@@ -34,9 +34,23 @@ export class ChatService {
     );
   }
 
-  public testConnection(): Observable<any> {
+  public testConnection(): Observable<boolean> {
     const httpUrl =
       this.store.appHeader.currentStableDiffusionApiUrl + '/options';
-    return this.http.get<any>(httpUrl);
+
+    //return this.http.get<any>(httpUrl);
+    return new Observable((observer) =>
+      this.http.get<any>(httpUrl).subscribe({
+        next: (result: any) => {
+          observer.next(true);
+        },
+        error: (error: any) => {
+          observer.error(error);
+        },
+        complete: () => {
+          observer.complete();
+        },
+      })
+    );
   }
 }
