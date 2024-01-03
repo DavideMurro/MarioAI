@@ -1,27 +1,55 @@
 # MarioAI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.2.1.
+Simple chat of Artificial Intelligence that generate images using Stable Diffusion API.
 
-## Development server
+## File structure
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- **docs**
+  Folder of the application build. all configurationis already setted to work with GitHub Pages, just need torun the command ng build
+- **src/assets**
+  Assets of the application, for now just the languages folder and the logos folder
+- **src/environments**
+  Custom general settings like defaultlanguage, or default API url
+- **src/app**
+  Core application
 
-## Code scaffolding
+## Libraries
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+- **angular material**
+  Material for the application UI
+- **material icons**
+  Application icon package
+- **ngx translate**
+  To manage the translation of the application.
 
-## Build
+## Translation i18n
 
-Run `ng build` to build the project. The build artifacts will be stored in the `docs/` directory.
+It has its folder in _assets_ directory called _i18n_ that contains all translation files configurable in the environment file. Each file is named with its own language code and has an extension configurable in environment file. The directory also contains the _i18n.ts_ file where is written the structure of the languages
 
-## Running unit tests
+## Environment
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+The environment is divided in development and production and it has these attributions:
 
-## Running end-to-end tests
+- **production**
+  Boolean that says if the file is for production build
+- **appTitle**
+  Application title
+- **languagesPathDirectory**
+  Path of languages directory that the library uses as root
+- **languagesFileFormat**
+  Format of the language files
+- **defaultLanguageCode**
+  Default language used by the application
+- **defaultStableDiffusionApiUrl**
+  Default API url for stable diffusion used by the application
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Demo link
 
-## Further help
+https://davide-murro.github.io/mario-ai/
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Screenshots
+
+![marioai_1](https://github.com/davide-murro/mario-ai/assets/118051417/a2ae19dc-4759-404d-a5fe-8b91c60604b2)
+![marioai_2](https://github.com/davide-murro/mario-ai/assets/118051417/57ecc148-afb1-47cb-b11d-506a1de7b8f5)
+![marioai_3](https://github.com/davide-murro/mario-ai/assets/118051417/e7190700-942b-46a7-a71b-3897ada6ba95)
+
