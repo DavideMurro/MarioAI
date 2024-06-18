@@ -2,7 +2,7 @@ import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -70,49 +70,49 @@ export function AppInitializerFactory(
     });
 }
 
-@NgModule({
+@NgModule({ 
   declarations: [
-    AppComponent,
-    HeaderComponent,
-    ChatInputComponent,
-    ChatBoxComponent,
-    LanguageSelectorDialogComponent,
-    ApiUrlsInputDialogComponent,
-    EnumToArrayPipe,
-  ],
-  imports: [
-    BrowserModule,
-    BrowserAnimationsModule,
-    MatIconModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient],
+        AppComponent,
+        HeaderComponent,
+        ChatInputComponent,
+        ChatBoxComponent,
+        LanguageSelectorDialogComponent,
+        ApiUrlsInputDialogComponent,
+        EnumToArrayPipe,
+    ],
+    imports: [
+      BrowserModule,
+      BrowserAnimationsModule,
+      MatIconModule,
+      TranslateModule.forRoot({
+          loader: {
+              provide: TranslateLoader,
+              useFactory: HttpLoaderFactory,
+              deps: [HttpClient],
+          },
+      }),
+
+      ReactiveFormsModule,
+
+      MatToolbarModule,
+      MatButtonModule,
+      MatFormFieldModule,
+      MatInputModule,
+      MatTooltipModule,
+      MatCardModule,
+      MatSelectModule,
+      MatDialogModule,
+      MatRadioModule
+    ], 
+    providers: [
+      {
+          provide: APP_INITIALIZER,
+          useFactory: AppInitializerFactory,
+          deps: [Injector, AppStore, TranslateService],
+          multi: true,
       },
-    }),
-
-    ReactiveFormsModule,
-
-    MatToolbarModule,
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatTooltipModule,
-    MatCardModule,
-    MatSelectModule,
-    MatDialogModule,
-    MatRadioModule,
-  ],
-  providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: AppInitializerFactory,
-      deps: [Injector, AppStore, TranslateService],
-      multi: true,
-    },
-  ],
-  bootstrap: [AppComponent],
+      provideHttpClient(withInterceptorsFromDi()),
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {}
