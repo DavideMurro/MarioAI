@@ -9,8 +9,8 @@ import { MessageDirectionEnum } from 'src/app/enums/message-direction-enum';
 import { Message } from 'src/app/models/message.model';
 import { TranslateService } from '@ngx-translate/core';
 import { Chat } from 'src/app/models/chat.model';
-import { defer } from 'rxjs';
 import { ApiUrlsData } from 'src/app/models/api-urls-data.model';
+import { MessageTypeEnum } from 'src/app/enums/message-type-enum';
 
 @Component({
   selector: 'app-header',
@@ -45,9 +45,10 @@ export class HeaderComponent {
         if (result) {
           this.store.setLanguage(result).subscribe(() => {
             // send message
-            let responseMessage = {
+            let responseMessage: Message = {
               direction: MessageDirectionEnum.response,
               sendingDate: new Date(),
+              type: MessageTypeEnum.text,
               text: this.translate.instant('EDIT_LANGUAGE_MESSAGE'),
             };
             this.chat.messages.unshift(responseMessage);
@@ -61,6 +62,7 @@ export class HeaderComponent {
         data: {
           stableDiffusionApiUrl:
             this.store.appHeader.currentStableDiffusionApiUrl,
+          aiCompanionApiUrl: this.store.appHeader.currentAiCompanionApiUrl,
         },
         width: '600px',
       })
@@ -70,33 +72,13 @@ export class HeaderComponent {
           this.store.setApiUrls(result);
 
           // send message
-          let responseMessage: Message;
-          defer(() => {
-            responseMessage = {
-              direction: MessageDirectionEnum.response,
-              isLoading: true,
-            };
-            this.chat.messages.unshift(responseMessage);
-
-            return this.chatService.testConnection();
-          }).subscribe({
-            next: (result: boolean) => {
-              responseMessage.sendingDate = new Date();
-              responseMessage.text = this.translate.instant(
-                'EDIT_API_URL_SUCCESS_MESSAGE'
-              );
-              responseMessage.isLoading = false;
-            },
-            error: (error: any) => {
-              console.error(error);
-              responseMessage.sendingDate = new Date();
-              responseMessage.isError = true;
-              responseMessage.text = this.translate.instant(
-                'EDIT_API_URL_ERROR_MESSAGE'
-              );
-              responseMessage.isLoading = false;
-            },
-          });
+          let responseMessage: Message = {
+            direction: MessageDirectionEnum.response,
+            sendingDate: new Date(),
+            type: MessageTypeEnum.text,
+            text: this.translate.instant('EDIT_API_URL_MESSAGE'),
+          };
+          this.chat.messages.unshift(responseMessage);
         }
       });
   }

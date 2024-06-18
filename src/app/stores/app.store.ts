@@ -22,6 +22,7 @@ export class AppStore {
       currentLanguageCode: environment.defaultLanguageCode,
       defaultLanguageCode: environment.defaultLanguageCode,
       currentStableDiffusionApiUrl: environment.defaultStableDiffusionApiUrl,
+      currentAiCompanionApiUrl: environment.defaultAiCompanionApiUrl,
     };
     this.chat = { messages: [] };
   }
@@ -33,5 +34,6 @@ export class AppStore {
 
   public setApiUrls(apiUrls: ApiUrlsData) {
     this.appHeader.currentStableDiffusionApiUrl = apiUrls.stableDiffusionApiUrl;
+    this.appHeader.currentAiCompanionApiUrl = apiUrls.aiCompanionApiUrl;
   }
 }

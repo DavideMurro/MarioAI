@@ -19,6 +19,9 @@ export class ApiUrlsInputDialogComponent {
       stableDiffusionApiUrl: new FormControl(this.data.stableDiffusionApiUrl, [
         Validators.required,
       ]),
+      aiCompanionApiUrl: new FormControl(this.data.aiCompanionApiUrl, [
+        Validators.required,
+      ]),
     });
   }
 

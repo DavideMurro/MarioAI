@@ -10,7 +10,22 @@ import { AppStore } from '../stores/app.store';
 export class ChatService {
   constructor(private http: HttpClient, private store: AppStore) {}
 
-  public sendMessage(message: string): Observable<TextToImageResponse> {
+  public sendMessageToText(message: string): Observable<string> {
+    const httpUrl = this.store.appHeader.currentAiCompanionApiUrl + '/prompt';
+    const httpParams = {
+      prompt: message,
+    };
+    const httpOptions = {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      responseType: 'text' as 'json',
+    };
+
+    return this.http.post<string>(httpUrl, httpParams, httpOptions);
+  }
+
+  public sendMessageToImage(message: string): Observable<TextToImageResponse> {
     const httpUrl =
       this.store.appHeader.currentStableDiffusionApiUrl + '/txt2img';
     const httpParams = {
@@ -34,11 +49,29 @@ export class ChatService {
     );
   }
 
-  public testConnection(): Observable<boolean> {
+  public testConnectionAiCompanion(): Observable<boolean> {
+    const httpUrl =
+      this.store.appHeader.currentAiCompanionApiUrl + '/companion';
+
+    return new Observable((observer) =>
+      this.http.get<any>(httpUrl).subscribe({
+        next: (result: any) => {
+          observer.next(true);
+        },
+        error: (error: any) => {
+          observer.error(error);
+        },
+        complete: () => {
+          observer.complete();
+        },
+      })
+    );
+  }
+
+  public testConnectionStableDiffusion(): Observable<boolean> {
     const httpUrl =
       this.store.appHeader.currentStableDiffusionApiUrl + '/options';
 
-    //return this.http.get<any>(httpUrl);
     return new Observable((observer) =>
       this.http.get<any>(httpUrl).subscribe({
         next: (result: any) => {

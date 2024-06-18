@@ -6,4 +6,5 @@ export class AppHeader {
   defaultLanguageCode!: string;
   currentLanguageCode!: string;
   currentStableDiffusionApiUrl!: string;
+  currentAiCompanionApiUrl!: string;
 }

@@ -6,4 +6,5 @@ export const environment = {
   defaultLanguageCode: 'en',
   defaultStableDiffusionApiUrl:
     'https://b1e2df0be0298e569b.gradio.live/sdapi/v1',
+  defaultAiCompanionApiUrl: 'http://localhost:3000/api',
 };

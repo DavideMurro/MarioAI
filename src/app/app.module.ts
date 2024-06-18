@@ -1,25 +1,12 @@
 import { APP_INITIALIZER, Injector, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import {
-  TranslateLoader,
-  TranslateModule,
-  TranslateService,
-} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
+import { LOCATION_INITIALIZED } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { HeaderComponent } from './components/header/header.component';
-import { ChatInputComponent } from './components/chat-input/chat-input.component';
-import { ChatBoxComponent } from './components/chat-box/chat-box.component';
-import { LanguageSelectorDialogComponent } from './components/language-selector-dialog/language-selector-dialog.component';
-import { ApiUrlsInputDialogComponent } from './components/api-urls-input-dialog/api-urls-input-dialog.component';
-
+import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -29,9 +16,24 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
-import { LOCATION_INITIALIZED } from '@angular/common';
-import { AppStore } from './stores/app.store';
+
+import {
+  TranslateLoader,
+  TranslateModule,
+  TranslateService,
+} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 import { environment } from 'src/environments/environment';
+import { AppComponent } from './app.component';
+import { AppStore } from './stores/app.store';
+import { EnumToArrayPipe } from './pipes/enum-to-array.pipe';
+
+import { HeaderComponent } from './components/header/header.component';
+import { ChatInputComponent } from './components/chat-input/chat-input.component';
+import { ChatBoxComponent } from './components/chat-box/chat-box.component';
+import { LanguageSelectorDialogComponent } from './components/language-selector-dialog/language-selector-dialog.component';
+import { ApiUrlsInputDialogComponent } from './components/api-urls-input-dialog/api-urls-input-dialog.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -76,6 +78,7 @@ export function AppInitializerFactory(
     ChatBoxComponent,
     LanguageSelectorDialogComponent,
     ApiUrlsInputDialogComponent,
+    EnumToArrayPipe,
   ],
   imports: [
     BrowserModule,
