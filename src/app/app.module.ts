@@ -83,7 +83,6 @@ export function AppInitializerFactory(
     imports: [
       BrowserModule,
       BrowserAnimationsModule,
-      MatIconModule,
       TranslateModule.forRoot({
           loader: {
               provide: TranslateLoader,
@@ -94,6 +93,7 @@ export function AppInitializerFactory(
 
       ReactiveFormsModule,
 
+      MatIconModule,
       MatToolbarModule,
       MatButtonModule,
       MatFormFieldModule,

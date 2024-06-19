@@ -4,7 +4,6 @@ import { AppHeader } from 'src/app/models/app-header.model';
 import { AppStore } from 'src/app/stores/app.store';
 import { LanguageSelectorDialogComponent } from '../language-selector-dialog/language-selector-dialog.component';
 import { ApiUrlsInputDialogComponent } from '../api-urls-input-dialog/api-urls-input-dialog.component';
-import { ChatService } from 'src/app/services/chat.service';
 import { MessageDirectionEnum } from 'src/app/enums/message-direction-enum';
 import { Message } from 'src/app/models/message.model';
 import { TranslateService } from '@ngx-translate/core';
@@ -24,7 +23,6 @@ export class HeaderComponent {
   constructor(
     private store: AppStore,
     private translate: TranslateService,
-    private chatService: ChatService,
     private dialog: MatDialog
   ) {
     this.appHeader = this.store.appHeader;
