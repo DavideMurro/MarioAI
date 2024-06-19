@@ -1,15 +1,13 @@
 # MarioAI
 
-Simple chat bot of Artificial Intelligence that generate text and images.
+Simple chat bot of Artificial Intelligence that generate text and images using open source projects.
 
 It uses Stable Diffusion API for generate images
-**documentation**
-https://stable-diffusion-art.com/install-windows/#Step_3_Clone_web-ui
-https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
+- https://stable-diffusion-art.com/install-windows/#Step_3_Clone_web-ui
+- https://github.com/AUTOMATIC1111/stable-diffusion-webui.git
 
 It uses AI Companion API for generate text
-**documentation**
-https://github.com/Hukasx0/ai-companion/tree/main
+- https://github.com/Hukasx0/ai-companion/tree/main
 
 ## File structure
 
