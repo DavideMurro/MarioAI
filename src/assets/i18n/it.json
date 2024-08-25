@@ -9,7 +9,7 @@
     "LOADING...": "Caricamento...",
     "ERROR": "Errore",
     "UNEXPECTED_ERROR": "Errore imprevisto",
-    "CONNECTION_ERROR_MESSAGE": "Vez non connetto più, controlla la connessione e la connessione API o riprova più tardi.",
+    "CONNECTION_ERROR_MESSAGE": "Vez non connetto, controlla la connessione e la configurazione URL API o riprova più tardi.",
     "ERROR_MESSAGE_REQUIRED": "Il messaggio è richiesto",
     "ERROR_MESSAGE_TOO_LONG": "Il messaggio è troppo lungo: {{actual}} / {{required}} caratteri",
     "ERROR_RESPONSE_TYPE_REQUIRED": "Il tipo di risposta è richiesto",

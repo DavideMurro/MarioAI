@@ -9,7 +9,7 @@
     "LOADING...": "Loading...",
     "ERROR": "Error",
     "UNEXPECTED_ERROR": "Unexpected error",
-    "CONNECTION_ERROR_MESSAGE": "Man, I can't connect anymore, check your connection and the API configuration or try again later.",
+    "CONNECTION_ERROR_MESSAGE": "Man, I can't connect, check your connection and the API URLs configuration or try again later.",
     "ERROR_MESSAGE_REQUIRED": "Message is required",
     "ERROR_MESSAGE_TOO_LONG": "Message is too long: {{actualLength}} / {{requiredLength}} chars",
     "ERROR_RESPONSE_TYPE_REQUIRED": "Response type is required",
